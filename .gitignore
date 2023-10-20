@@ -1,0 +1,12 @@
+
+# Node.js
+databasepg
+.env
+package-lock.json
+node_modules
+dist
+
+# TypeScript
+*.js
+*.map
+*.d.ts

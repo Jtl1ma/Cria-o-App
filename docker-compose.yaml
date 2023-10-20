@@ -1,0 +1,49 @@
+version: '3.7'
+services:
+  #db:
+  #  image: postgres:latest
+  #  command: --default-authentication-plugin=postgres_native_password
+  #  container_name: container_pg
+  #  environment:
+  #    POSTGRES_DB: db_pg
+  #    POSTGRES_USER: postgres
+  #    POSTGRES_PASSWORD: 
+  #  ports:
+  #    - "5432:5432"  
+  #  volumes:
+  #    - ../postgres-data:/var/lib/postgresql/data
+  #  restart: always
+  postgres:
+    image: "postgres:14.5"
+    container_name: container_pg
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./databasepg:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: "Jonh"
+      POSTGRES_PASSWORD: "admin"
+      POSTGRES_DB: "postgresSQLDb"
+
+  api:
+    build: .
+    container_name: container-node
+    restart: always
+    volumes:
+      - .:/home/node/app
+    ports:
+      - "9001:9001"
+    depends_on:
+      - postgres
+ # web:
+ #   image: "php"
+ #   container_name: php-container
+ #   restart: always
+ #   volumes:
+ #     - ./website:/var/www/html
+ #   ports:
+ #     - "8888:80"
+ #   depends_on:
+ #     - db
+ #     - api
+      
